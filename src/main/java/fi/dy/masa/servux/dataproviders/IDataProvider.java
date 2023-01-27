@@ -1,8 +1,8 @@
 package fi.dy.masa.servux.dataproviders;
 
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Identifier;
 import fi.dy.masa.servux.network.IPluginChannelHandler;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 
 public interface IDataProvider
 {
@@ -29,7 +29,7 @@ public interface IDataProvider
      * for incoming data requests and to respond and send the requested data.
      * @return
      */
-    Identifier getNetworkChannel();
+    ResourceLocation getNetworkChannel();
 
     /**
      * Returns the current protocol version this provider supports

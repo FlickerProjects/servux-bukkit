@@ -1,8 +1,9 @@
 package fi.dy.masa.servux.network.util;
 
-import java.util.Objects;
-import net.minecraft.network.PacketByteBuf;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
+
+import java.util.Objects;
 
 public class PacketUtils
 {
@@ -13,10 +14,10 @@ public class PacketUtils
      * @return a slice of the buffer
      * @see ByteBuf#slice()
      */
-    public static PacketByteBuf slice(ByteBuf buf)
+    public static FriendlyByteBuf slice(ByteBuf buf)
     {
         Objects.requireNonNull(buf, "ByteBuf cannot be null");
-        return new PacketByteBuf(buf.slice());
+        return new FriendlyByteBuf(buf.slice());
     }
 
     /**
@@ -26,9 +27,9 @@ public class PacketUtils
      * @return a slice of the buffer
      * @see ByteBuf#retainedSlice()
      */
-    public static PacketByteBuf retainedSlice(ByteBuf buf)
+    public static FriendlyByteBuf retainedSlice(ByteBuf buf)
     {
         Objects.requireNonNull(buf, "ByteBuf cannot be null");
-        return new PacketByteBuf(buf.retainedSlice());
+        return new FriendlyByteBuf(buf.retainedSlice());
     }
 }

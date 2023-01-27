@@ -1,14 +1,14 @@
 package fi.dy.masa.servux.network;
 
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 public interface IPluginChannelHandler
 {
-    Identifier getChannel();
+    ResourceLocation getChannel();
 
-    default void onPacketReceived(PacketByteBuf buf, ServerPlayNetworkHandler netHandler)
+    default void onPacketReceived(FriendlyByteBuf buf, ServerGamePacketListenerImpl netHandler)
     {
     }
 
@@ -17,12 +17,12 @@ public interface IPluginChannelHandler
         return false;
     }
 
-    default boolean subscribe(ServerPlayNetworkHandler netHandler)
+    default boolean subscribe(ServerGamePacketListenerImpl netHandler)
     {
         return false;
     }
 
-    default boolean unsubscribe(ServerPlayNetworkHandler netHandler)
+    default boolean unsubscribe(ServerGamePacketListenerImpl netHandler)
     {
         return false;
     }

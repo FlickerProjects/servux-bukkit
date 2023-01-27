@@ -1,19 +1,19 @@
 package fi.dy.masa.servux.mixin;
 
+import fi.dy.masa.servux.network.ServerPacketChannelHandler;
+import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import fi.dy.masa.servux.network.ServerPacketChannelHandler;
 
-@Mixin(value = ServerPlayNetworkHandler.class, priority = 998)
+@Mixin(value = ServerGamePacketListenerImpl.class, priority = 998)
 public abstract class MixinServerPlayNetworkHandler
 {
-    @Inject(method = "onCustomPayload", at = @At("HEAD"))
-    private void servux_handleCustomPayload(CustomPayloadC2SPacket packet, CallbackInfo ci)
+    @Inject(method = "handleCustomPayload", at = @At("HEAD"))
+    private void servux_handleCustomPayload(ServerboundCustomPayloadPacket packet, CallbackInfo ci)
     {
-        ServerPacketChannelHandler.INSTANCE.processPacketFromClient(packet, (ServerPlayNetworkHandler) (Object) this);
+        ServerPacketChannelHandler.INSTANCE.processPacketFromClient(packet, (ServerGamePacketListenerImpl) (Object) this);
     }
 }
